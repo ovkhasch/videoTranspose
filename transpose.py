@@ -19,7 +19,7 @@ def transform_video(input_file, output_file):
     # Prepare the output video writer
     out = cv2.VideoWriter(output_file, cv2.VideoWriter_fourcc(*'mp4v'), fps, (frame_count, frame_height))
 
-    # Initialize a numpy array to store output frames
+    # Initialize a numpy array to store input frames
     input_frames = np.zeros((frame_count, frame_height, frame_width, 3), dtype=np.uint8)
 
     # Process each frame
