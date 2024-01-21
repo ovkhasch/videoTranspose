@@ -14,6 +14,8 @@ def transform_video(input_file, output_file):
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     fps = cap.get(cv2.CAP_PROP_FPS)
 
+    print(f"width {frame_width}, height {frame_height}, count {frame_count}")
+
     # Prepare the output video writer
     out = cv2.VideoWriter(output_file, cv2.VideoWriter_fourcc(*'mp4v'), fps, (frame_count, frame_height))
 
@@ -25,11 +27,12 @@ def transform_video(input_file, output_file):
         ret, frame = cap.read()
         if not ret:
             break
-        # Assign pixels to the correct position in the output frames
+        # Store input frames in 4d shape
         input_frames[frame_idx] = frame
 
+    # transform
     output_frames = input_frames.transpose(2, 1, 0, 3)
-    print(frame_width, frame_height, frame_count)
+
     print("Dimensions of input_frames:", input_frames.shape)
     print("Dimensions of output_frames:", output_frames.shape)
 
